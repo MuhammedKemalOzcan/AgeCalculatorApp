@@ -1,5 +1,6 @@
-.app{
+:root{
     height: 100vh;
+    width: 100vw;
     background-color: rgb(209, 204, 204);
     display: flex;
     justify-content: center;
@@ -8,11 +9,10 @@
 
 .form{
     width: 600px;
-    height: 500px;
+    height: 600px;
     background-color: white;
     display: flex;
-    flex-direction: row;
-    align-content: center;
+    flex-direction: column;
     border-radius: 30px 30px 200px 30px;
     padding: 50px;
 }

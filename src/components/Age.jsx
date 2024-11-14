@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import "../app.css"
 import button from "../assets/arrow.png"
 
-function Age({ day, month, year, setDay, setMonth, setYear }) {
+function Age({ day, month, year, setDay, setMonth, setYear, isValid, setIsValid }) {
 
-  const [isValid, setIsValid] = useState(0);
+
 
   const handleDayChange = ((e) => {
     setDay(e.target.value);
@@ -22,9 +22,6 @@ function Age({ day, month, year, setDay, setMonth, setYear }) {
 
   const handleSubmit = ((e) => {
     e.preventDefault();
-    setDay(0);
-    setMonth(0);
-    setYear(0);
 
     if (day > 31 || day <= 0) {
       setIsValid(1);
@@ -39,18 +36,17 @@ function Age({ day, month, year, setDay, setMonth, setYear }) {
       console.log("Hatalı yıl girildi.");
     }
     else if (day > 0 && month > 0 && year > 0 && day < 31 && month < 12 && year < 2024) {
-      setIsValid(0);
+      setIsValid(4);
     }
   })
 
-  console.log(isValid);
 
 
   return (
-    <div className='form'>
+    <div className='flex flex-col border-b-2'>
       {
         isValid == 0 ?
-          <form className='flex gap-12 h-1/4 border-b-2'>
+          <form className='flex gap-12 h-1/4'>
             <label className='flex flex-col'>
               Day
               <input
@@ -79,7 +75,7 @@ function Age({ day, month, year, setDay, setMonth, setYear }) {
               />
             </label>
             <button
-              className='mt-16'
+              className='mt-8'
               onClick={handleSubmit}
             >
               <img src={button} />
@@ -87,7 +83,7 @@ function Age({ day, month, year, setDay, setMonth, setYear }) {
           </form>
           :
           isValid == 1 ?
-            <form className='flex gap-12 h-1/4 border-b-2'>
+            <form className='flex gap-12 h-1/4'>
               <label className='flex flex-col'>
                 <p className='text-red-500'>Day</p>
                 <input
@@ -117,7 +113,7 @@ function Age({ day, month, year, setDay, setMonth, setYear }) {
                 />
               </label>
               <button
-                className='mt-16'
+                className='mt-8'
                 onClick={handleSubmit}
               >
                 <img src={button} />
@@ -125,7 +121,7 @@ function Age({ day, month, year, setDay, setMonth, setYear }) {
             </form>
             :
             isValid == 2 ?
-              <form className='flex gap-12 h-1/4 border-b-2'>
+              <form className='flex gap-12 h-1/4'>
                 <label className='flex flex-col'>
                   <p className='text-red-500'>Day</p>
                   <input
@@ -155,7 +151,7 @@ function Age({ day, month, year, setDay, setMonth, setYear }) {
                   />
                 </label>
                 <button
-                  className='mt-16'
+                  className='mt-8'
                   onClick={handleSubmit}
                 >
                   <img src={button} />
@@ -163,7 +159,7 @@ function Age({ day, month, year, setDay, setMonth, setYear }) {
               </form>
               :
               isValid == 3 ?
-                <form className='flex gap-12 h-1/4 border-b-2'>
+                <form className='flex gap-12 h-1/4'>
                   <label className='flex flex-col'>
                     <p className='text-red-500'>Day</p>
                     <input
@@ -193,51 +189,88 @@ function Age({ day, month, year, setDay, setMonth, setYear }) {
                     <span className='text-[10px] text-red-500'>Must be a valid Year</span>
                   </label>
                   <button
-                    className='mt-16'
+                    className='mt-8'
                     onClick={handleSubmit}
                   >
                     <img src={button} />
                   </button>
                 </form>
                 :
-                <form className='flex gap-12 h-1/4 border-b-2'>
-                  <label className='flex flex-col'>
-                    <p className='text-red-500'>Day</p>
-                    <input
-                      value={day}
-                      onChange={handleDayChange}
-                      type="text"
-                      className='w-24 h-10 p-4 border rounded border-red-500 outline-none focus:border-purple-800'
-                    />
-                    <span className='text-[10px] text-red-500'>Must be a valid day</span>
-                  </label>
-                  <label className='flex flex-col'>
-                    <p className='text-red-500'>Month</p>
-                    <input
-                      value={month}
-                      onChange={handleMonthChange}
-                      type="text"
-                      className='w-24 h-10 p-4 border rounded border-red-500 outline-none focus:border-purple-800'
-                    />
-                    <span className='text-[10px] text-red-500'>Must be a valid month</span>
-                  </label>
-                  <label className='flex flex-col'>
-                    <p className='text-red-500'>Year</p>
-                    <input
-                      value={year}
-                      onChange={handleYearChange}
-                      type="text"
-                      className='w-24 h-10 p-4 border rounded border-red-500 outline-none focus:border-purple-800'
-                    />
-                    <span className='text-[10px] text-red-500'>Must be a valid Year</span>
-                  </label>
-                  <button
-                    className='mt-16'
-                    onClick={handleSubmit}
-                  >
-                    <img src={button} />
-                  </button>
-                </form>
+                isValid == 4 ?
+                  <form className='flex gap-12 h-1/4'>
+                    <label className='flex flex-col'>
+                      Day
+                      <input
+                        value={day}
+                        onChange={handleDayChange}
+                        type="text"
+                        className='w-24 h-10 p-4 border rounded border-gray outline-none focus:border-purple-800'
+                      />
+                    </label>
+                    <label className='flex flex-col'>
+                      Month
+                      <input
+                        value={month}
+                        onChange={handleMonthChange}
+                        type="text"
+                        className='w-24 h-10 p-4 border rounded border-gray outline-none focus:border-purple-800'
+                      />
+                    </label>
+                    <label className='flex flex-col'>
+                      Year
+                      <input
+                        value={year}
+                        onChange={handleYearChange}
+                        type="text"
+                        className='w-24 h-10 p-4 border rounded border-gray outline-none focus:border-purple-800'
+                      />
+                    </label>
+                    <button
+                      className='mt-8'
+                      onClick={handleSubmit}
+                    >
+                      <img src={button} />
+                    </button>
+                  </form>
+                  :
+                  <form className='flex gap-12 h-1/4'>
+                    <label className='flex flex-col'>
+                      <p className='text-red-500'>Day</p>
+                      <input
+                        value={day}
+                        onChange={handleDayChange}
+                        type="text"
+                        className='w-24 h-10 p-4 border rounded border-red-500 outline-none focus:border-purple-800'
+                      />
+                      <span className='text-[10px] text-red-500'>Must be a valid day</span>
+                    </label>
+                    <label className='flex flex-col'>
+                      <p className='text-red-500'>Month</p>
+                      <input
+                        value={month}
+                        onChange={handleMonthChange}
+                        type="text"
+                        className='w-24 h-10 p-4 border rounded border-red-500 outline-none focus:border-purple-800'
+                      />
+                      <span className='text-[10px] text-red-500'>Must be a valid month</span>
+                    </label>
+                    <label className='flex flex-col'>
+                      <p className='text-red-500'>Year</p>
+                      <input
+                        value={year}
+                        onChange={handleYearChange}
+                        type="text"
+                        className='w-24 h-10 p-4 border rounded border-red-500 outline-none focus:border-purple-800'
+                      />
+                      <span className='text-[10px] text-red-500'>Must be a valid Year</span>
+                    </label>
+                    <button
+                      className='mt-8'
+                      onClick={handleSubmit}
+                    >
+                      <img src={button} />
+                    </button>
+                  </form>
       }
     </div>
   )
