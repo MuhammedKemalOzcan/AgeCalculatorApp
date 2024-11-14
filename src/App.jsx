@@ -5,16 +5,18 @@ import AgeShow from './components/AgeShow';
 
 function App() {
 
-  const [day, setDay] = useState(0);
-  const [month, setMonth] = useState(0);
-  const [year, setYear] = useState(0);
+  const [date, setDate] = useState({ day: "", month: "" , year: "" });
+  const [error, setError] = useState("");
 
-  const [isValid, setIsValid] = useState(0);
+  //Durum değişikliğinde veriyi güncellemek için bir fonksiyon
+  const handleDateChange = (field, value) => {
+    setDate((prevDetails) => ({ ...prevDetails, [field]: value }));
+  }
 
   return (
     <div className='form'>
-      <Age day={day} month={month} year={year} setDay={setDay} setMonth={setMonth} setYear={setYear} isValid={isValid} setIsValid={setIsValid}/>
-      <AgeShow day={day} month={month} year={year} isValid={isValid}/>
+      <Age date={date} setDate={handleDateChange} error={error} setError={setError} />
+      <AgeShow date={date} error={error} />
     </div>
   )
 }
